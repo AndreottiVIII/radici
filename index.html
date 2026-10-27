@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Radici</title>
+<style>
+:root{--bg:#faf7f2;--txt:#2a2622;--line:#cfc5b5;--acc:#8a4b2a}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1917;--txt:#ece6dd;--line:#4a443d;--acc:#e0a27c}}
+body{margin:0;background:var(--bg);color:var(--txt);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#guscio{max-width:22rem;margin:20vh auto 0;padding:0 1rem}
+#guscio input[type=password]{width:100%;font:inherit;padding:.6rem;margin:.3rem 0 .8rem;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit}
+#guscio button{font:inherit;padding:.55rem 1.4rem;border:0;border-radius:8px;background:var(--acc);color:var(--bg);cursor:pointer}
+#guscio label.r{display:block;margin:0 0 .8rem;font-size:.9rem}
+#msg{color:#b3402f;min-height:1.5em;margin-top:.8rem}
+</style>
+</head>
+<body>
+<form id="guscio">
+<label for="pw">Password</label>
+<input id="pw" type="password" autocomplete="current-password" autofocus>
+<label class="r"><input id="ric" type="checkbox"> ricordami su questo dispositivo</label>
+<button type="submit">Apri</button>
+<div id="msg" role="alert"></div>
+</form>
+<script>
+(function () {
+  var D = {"i": 600000, "s": "URV4edv6m0PX7sQs7G68Dw==", "v": "uLjLcwDknb6uj1zE", "c": "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"};
+  var CH = "radici.k";   // chiave derivata (non la password) salvata se si sceglie "ricordami"
+
+  function da64(s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); }
+  function a64(u8) { var s = ""; for (var i = 0; i < u8.length; i++) s += String.fromCharCode(u8[i]); return btoa(s); }
+  function msg(t) { var m = document.getElementById("msg"); if (m) m.textContent = t; }
+
+  // decifra con la chiave grezza (32 byte) e sostituisce la pagina
+  async function apri(raw) {
+    var chiave = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+    var chiaro = await crypto.subtle.decrypt({ name: "AES-GCM", iv: da64(D.v) }, chiave, da64(D.c));
+    document.body.innerHTML = new TextDecoder().decode(chiaro);
+    if (location.hash) {
+      var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (el) el.scrollIntoView();
+    }
+  }
+
+  async function derivaChiave(password) {
+    var base = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+    var bits = await crypto.subtle.deriveBits(
+      { name: "PBKDF2", hash: "SHA-256", salt: da64(D.s), iterations: D.i }, base, 256);
+    return new Uint8Array(bits);
+  }
+
+  if (!window.crypto || !crypto.subtle) {
+    msg("Questo browser non supporta la cifratura necessaria (serve una pagina https).");
+  }
+
+  // chiave già ricordata? prova ad aprire subito; se non vale più (pagina rigenerata) la butta
+  (async function () {
+    try {
+      var k = localStorage.getItem(CH);
+      if (!k) return;
+      try { await apri(da64(k)); }
+      catch (e) { try { localStorage.removeItem(CH); } catch (e2) {} }
+    } catch (e) {}
+  })();
+
+  document.getElementById("guscio").addEventListener("submit", async function (ev) {
+    ev.preventDefault();
+    var pw = document.getElementById("pw").value;
+    var ric = document.getElementById("ric").checked;
+    msg("");
+    if (!pw) return;
+    try {
+      var raw = await derivaChiave(pw);
+      await apri(raw);                       // password sbagliata: qui lancia
+      if (ric) { try { localStorage.setItem(CH, a64(raw)); } catch (e) {} }
+    } catch (e) {
+      msg("Password sbagliata");
+    }
+  });
+})();
+</script>
+</body>
+</html>
